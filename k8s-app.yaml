@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
         - name: spring-boot-k8s
-          image: user-service:1.0 # Image that will be used to containers in the cluster
+          image: '' # Image that will be used to containers in the cluster
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8085 # The port that the container is running on in the cluster
