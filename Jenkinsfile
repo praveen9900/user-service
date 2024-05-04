@@ -46,7 +46,7 @@ pipeline{
         stage("Deploy To Kubernetes"){
             steps{
                script {
-                    kubeconfig(credentialsId: 'kubeconfig-pwd', serverUrl: '') {
+                    kubeconfig(credentialsId: 'k8s', serverUrl: '') {
                         bat """powershell -Command "(Get-Content k8s-app.yaml) -replace 'image: .*', 'image: ${IMAGE_NAME}:${IMAGE_TAG}' | Set-Content k8s-app.yaml" """
                         bat 'kubectl apply -f k8s-app.yaml'
                     }
@@ -56,7 +56,7 @@ pipeline{
         stage("Verify deployment") {
             steps {
                 script {
-                    kubeconfig(credentialsId: 'kubeconfig-pwd', serverUrl: '') {
+                    kubeconfig(credentialsId: 'k8s', serverUrl: '') {
                         // Check deployed pods
                         bat 'kubectl get pods -n user-app'
 
